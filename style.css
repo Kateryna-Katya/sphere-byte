@@ -404,7 +404,7 @@ a {
 }
 
 .section-title {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 800;
     margin-bottom: 20px;
     text-transform: uppercase;
@@ -1016,4 +1016,91 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 80px;
+        /* Уменьшаем отступ сверху для мобилок */
+        min-height: auto;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero__layout {
+        grid-template-columns: 1fr;
+        /* Одна колонка */
+        gap: 20px;
+    }
+
+    .hero__canvas {
+        opacity: 0.6;
+        /* Приглушаем фон, чтобы текст лучше читался */
+    }
+
+    .hero__title {
+        font-size: 2.2rem;
+        /* Уменьшаем заголовок */
+        line-height: 1.2;
+        margin: 20px 0;
+    }
+
+    .text-accent-stroke {
+        -webkit-text-stroke: 0.5px var(--accent);
+        /* Тоньше обводка */
+    }
+
+    .hero__description {
+        font-size: 1rem;
+        padding: 0 10px;
+        margin-bottom: 30px;
+        color: var(--text-main);
+        /* Делаем текст чуть ярче для контраста */
+    }
+
+    .hero__btns {
+        flex-direction: column;
+        /* Кнопки друг под другом */
+        gap: 15px;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .btn {
+        width: 100%;
+        /* Кнопки на всю ширину контейнера */
+        padding: 15px;
+    }
+
+    /* Скрываем терминал на маленьких экранах или упрощаем его */
+    .hero__terminal {
+        display: none;
+        /* Терминал занимает слишком много места */
+    }
+
+    /* Альтернатива: если хочешь оставить терминал, но сделать его меньше */
+    /* .hero__terminal {
+        display: block;
+        transform: scale(0.8);
+        margin-top: 20px;
+    } 
+    */
+
+    .hero__tag-wrapper {
+        justify-content: center;
+        display: flex;
+    }
+}
+
+/* Фикс для очень маленьких экранов (iPhone SE и т.д.) */
+@media (max-width: 380px) {
+    .hero__title {
+        font-size: 1.8rem;
+    }
+
+    .hero__tag {
+        font-size: 0.7rem;
+    }
 }
