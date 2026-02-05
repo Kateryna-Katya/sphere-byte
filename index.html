@@ -26,7 +26,7 @@
     <header class="header">
         <div class="container">
             <nav class="nav">
-                <a href="/" class="logo">
+                <a href="./#hero" class="logo">
                     <span class="logo__icon"></span>
                     <span class="logo__text">
                         <?= $domainTitle ?>
@@ -34,14 +34,14 @@
                 </a>
 
                 <ul class="menu">
-                    <li><a href="#hero" class="menu__link">Главная</a></li>
-                    <li><a href="#courses" class="menu__link">Курсы</a></li>
-                    <li><a href="#method" class="menu__link">Методология</a></li>
-                    <li><a href="#career" class="menu__link">Карьера</a></li>
-                    <li><a href="#reviews" class="menu__link">Отзывы</a></li>
+                    <li><a href="./#hero" class="menu__link">Главная</a></li>
+                    <li><a href="./#courses" class="menu__link">Курсы</a></li>
+                    <li><a href="./#method" class="menu__link">Методология</a></li>
+                    <li><a href="./#career" class="menu__link">Карьера</a></li>
+                    <li><a href="./#reviews" class="menu__link">Отзывы</a></li>
                 </ul>
 
-                <a href="#contact" class="btn btn--outline hide-mobile">Связаться</a>
+                <a href="./#contact" class="btn btn--outline hide-mobile">Связаться</a>
 
                 <button class="burger" aria-label="Menu">
                     <span></span>
@@ -247,7 +247,7 @@
 <div class="swiper-wrapper">
     <div class="swiper-slide review-card">
         <div class="review-card__header">
-            <img src="img/placeholder.png" alt="Marc Durand" class="review-card__img">
+            <img src="./img/one.jpg" alt="Marc Durand" class="review-card__img">
             <div>
                 <h4 class="review-card__name">Marc Durand</h4>
                 <p class="review-card__pos">Frontend Developer, Paris</p>
@@ -259,7 +259,7 @@
 
     <div class="swiper-slide review-card">
         <div class="review-card__header">
-            <img src="img/placeholder.png" alt="Sophie Martin" class="review-card__img">
+            <img src="./img/two.jpg" alt="Sophie Martin" class="review-card__img">
             <div>
                 <h4 class="review-card__name">Sophie Martin</h4>
                 <p class="review-card__pos">UI/UX Designer, Lyon</p>
@@ -271,7 +271,7 @@
 
     <div class="swiper-slide review-card">
         <div class="review-card__header">
-            <img src="img/placeholder.png" alt="Lucas Bernard" class="review-card__img">
+            <img src="./img/three.jpg" alt="Lucas Bernard" class="review-card__img">
             <div>
                 <h4 class="review-card__name">Lucas Bernard</h4>
                 <p class="review-card__pos">Backend Engineer, Nice</p>
@@ -283,7 +283,7 @@
 
     <div class="swiper-slide review-card">
         <div class="review-card__header">
-            <img src="img/placeholder.png" alt="Amélie Petit" class="review-card__img">
+            <img src="./img/four.jpg" alt="Amélie Petit" class="review-card__img">
             <div>
                 <h4 class="review-card__name">Amélie Petit</h4>
                 <p class="review-card__pos">Data Analyst, Bordeaux</p>
@@ -334,8 +334,8 @@
                         <input type="email" name="email" class="form__input" placeholder="Email" required>
                     </div>
                     <div class="form__group">
-                        <input type="tel" name="phone" id="phone" class="form__input"
-                            placeholder="Телефон (только цифры)" required>
+                        <input type="tel" name="phone" id="phone" class="form__input" placeholder="Телефон (только цифры)" inputmode="numeric"
+                            required>
                     </div>
 
                     <div class="form__captcha">
@@ -370,7 +370,7 @@
         <div class="container">
             <div class="footer__grid">
                 <div class="footer__col">
-                    <a href="/" class="logo footer__logo">
+                    <a href="./#hero" class="logo footer__logo">
                         <span class="logo__icon"></span>
                         <span class="logo__text">
                             <?= $domainTitle ?>
@@ -383,10 +383,10 @@
                 <div class="footer__col">
                     <h4 class="footer__title">Навигация</h4>
                     <ul class="footer__list">
-                        <li><a href="#courses">Курсы</a></li>
-                        <li><a href="#method">Методология</a></li>
-                        <li><a href="#career">Карьера</a></li>
-                        <li><a href="#contact">Контакты</a></li>
+                        <li><a href="./#courses">Курсы</a></li>
+                        <li><a href="./#method">Методология</a></li>
+                        <li><a href="./#career">Карьера</a></li>
+                        <li><a href="./#contact">Контакты</a></li>
                     </ul>
                 </div>
 
@@ -422,16 +422,16 @@
             </div>
         </div>
     </footer>
-    <div id="cookie-popup" class="cookie-popup">
-        <div class="cookie-popup__content">
-            <div class="cookie-popup__icon"><i class="fa-solid fa-cookie-bite"></i></div>
-            <div class="cookie-popup__text">
-                Этот сайт использует cookies для улучшения работы. Подробнее — в нашей <a href="./cookies.php">Cookie
-                    политике</a>.
-            </div>
-            <button id="cookie-accept" class="btn btn--small btn--primary">Принять</button>
+<div id="cookie-popup" class="cookie-popup">
+    <div class="cookie-popup__content">
+        <div class="cookie-popup__icon"><i class="fa-solid fa-cookie-bite"></i></div>
+        <div class="cookie-popup__text">
+            Этот сайт использует cookies для улучшения работы. Подробнее — в нашей <a href="./cookies.php">Cookie
+                политике</a>.
         </div>
+        <button id="cookie-accept" class="btn btn--small btn--primary">Принять</button>
     </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 
 <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>

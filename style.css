@@ -1104,3 +1104,134 @@ a {
         font-size: 0.7rem;
     }
 }
+/* Базовое состояние (скрыто) */
+.cookie-popup {
+    position: fixed;
+    bottom: -120%;
+    /* Полностью прячем за край */
+    left: 20px;
+    right: 20px;
+    background: #161821;
+    /* var(--card-bg) */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    z-index: 9999;
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    max-width: 450px;
+    margin-left: auto;
+    /* Прижимаем к правому краю на десктопах */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Активное состояние (когда скрипт сработал) */
+.cookie-popup--active {
+    bottom: 30px;
+    /* Выезжает вверх */
+}
+
+.cookie-popup__content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cookie-popup__icon {
+    font-size: 1.5rem;
+    color: #8b5cf6;
+    /* var(--accent) */
+}
+
+.cookie-popup__text {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    /* var(--text-dim) */
+    line-height: 1.4;
+}
+
+.cookie-popup__text a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.btn--small {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+.pages__intro {
+    max-width: 800px;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.contact-card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.contact-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.contact-card__icon {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 25px;
+}
+
+.contact-card h2 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.contact-card p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+}
+
+.contact-link {
+    color: var(--white);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--accent);
+}
+
+.contact-address {
+    font-style: normal;
+    color: var(--white);
+    line-height: 1.6;
+}
+
+.contact-extra {
+    text-align: center;
+    padding: 30px;
+    background: rgba(139, 92, 246, 0.05);
+    border-radius: 12px;
+}
+
+.accent-link {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .contact-cards {
+        grid-template-columns: 1fr;
+    }
+}
