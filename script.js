@@ -1,198 +1,169 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('.header');
+    
+    // --- 1. МОБИЛЬНОЕ МЕНЮ ---
     const burger = document.querySelector('.burger');
     const menu = document.querySelector('.menu');
+    const body = document.body;
 
-    // Скролл хедера
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('header--scrolled');
-        } else {
-            header.classList.remove('header--scrolled');
-        }
-    });
-
-    // Мобильное меню
-    burger.addEventListener('click', () => {
-        menu.classList.toggle('menu--active');
+    burger?.addEventListener('click', () => {
         burger.classList.toggle('burger--active');
+        menu.classList.toggle('menu--active');
+        body.style.overflow = menu.classList.contains('menu--active') ? 'hidden' : '';
     });
 
-    // Закрытие меню при клике на ссылку
-    document.querySelectorAll('.menu__link').forEach(link => {
+    // Закрытие при клике на ссылку и плавный скролл
+    document.querySelectorAll('.menu__link, .btn').forEach(link => {
         link.addEventListener('click', () => {
+            burger.classList.remove('burger--active');
             menu.classList.remove('menu--active');
+            body.style.overflow = '';
         });
     });
-    
-});
-// Интерактивная сетка в стиле Digital Wave
-const initHeroGrid = () => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    
-    const container = document.getElementById('hero-canvas');
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    container.appendChild(renderer.domElement);
 
-    // Создаем сетку из кубов
-    const group = new THREE.Group();
-    const size = 30; // количество кубов
-    const spacing = 1.5;
-    const geometry = new THREE.BoxGeometry(0.8, 0.8, 0.8);
-    const material = new THREE.MeshPhongMaterial({ color: 0x8b5cf6, shininess: 100 });
+    // --- 2. COOKIE POPUP ---
+    const cookiePopup = document.getElementById('cookie-popup');
+    const cookieAccept = document.getElementById('cookie-accept');
 
-    const cubes = [];
-    for (let x = 0; x < size; x++) {
-        for (let z = 0; z < size; z++) {
-            const cube = new THREE.Mesh(geometry, material);
-            cube.position.set((x - size/2) * spacing, 0, (z - size/2) * spacing);
-            group.add(cube);
-            cubes.push(cube);
+    if (!localStorage.getItem('cookies-accepted')) {
+        setTimeout(() => {
+            cookiePopup.classList.add('cookie-popup--active');
+        }, 2000);
+    }
+
+    cookieAccept?.addEventListener('click', () => {
+        cookiePopup.classList.remove('cookie-popup--active');
+        localStorage.setItem('cookies-accepted', 'true');
+    });
+
+    // --- 3. THREE.JS HERO GRID (Digital Wave) ---
+    const initHeroGrid = () => {
+        const container = document.getElementById('hero-canvas');
+        if (!container) return;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        const group = new THREE.Group();
+        const size = 25; 
+        const spacing = 1.8;
+        const geometry = new THREE.BoxGeometry(0.7, 0.7, 0.7);
+        const material = new THREE.MeshPhongMaterial({ color: 0x8b5cf6, shininess: 100 });
+
+        const cubes = [];
+        for (let x = 0; x < size; x++) {
+            for (let z = 0; z < size; z++) {
+                const cube = new THREE.Mesh(geometry, material);
+                cube.position.set((x - size/2) * spacing, 0, (z - size/2) * spacing);
+                group.add(cube);
+                cubes.push(cube);
+            }
         }
-    }
-    scene.add(group);
+        scene.add(group);
 
-    // Свет
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 10, 7.5);
-    scene.add(light);
-    scene.add(new THREE.AmbientLight(0x404040));
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(5, 10, 7.5);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x404040));
 
-    camera.position.set(0, 25, 30);
-    camera.lookAt(0, 0, 0);
+        camera.position.set(0, 20, 30);
+        camera.lookAt(0, 0, 0);
 
-    let mouse = new THREE.Vector2();
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    });
-
-    function animate() {
-        requestAnimationFrame(animate);
-        
-        cubes.forEach(cube => {
-            const dist = Math.sqrt(Math.pow(cube.position.x - mouse.x * 20, 2) + Math.pow(cube.position.z - mouse.y * -20, 2));
-            const wave = Math.sin(dist * 0.5 - Date.now() * 0.002) * 2;
-            cube.position.y = wave;
-            cube.rotation.y += 0.01;
+        let mouse = { x: 0, y: 0 };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
         });
 
-        renderer.render(scene, camera);
-    }
-    animate();
-};
+        function animate() {
+            requestAnimationFrame(animate);
+            cubes.forEach(cube => {
+                const dist = Math.sqrt(Math.pow(cube.position.x - mouse.x * 20, 2) + Math.pow(cube.position.z - mouse.y * -20, 2));
+                cube.position.y = Math.sin(dist * 0.5 - Date.now() * 0.002) * 2.5;
+                cube.rotation.y += 0.01;
+            });
+            renderer.render(scene, camera);
+        }
+        animate();
 
-// Эффект печати кода
-const initTypewriter = () => {
-    new TypeIt("#typewriter", {
-        speed: 50,
-        waitUntilVisible: true,
-        loop: true
-    })
-    .type("git clone sphere-byte.fit", {delay: 1000})
-    .break()
-    .type("> Инициализация платформы...")
-    .break()
-    .type("> Подключение AI-модулей...")
-    .pause(500)
-    .delete()
-    .type("Готовы начать карьеру в IT?")
-    .go();
-};
-
-initHeroGrid();
-initTypewriter();
-const initCardsGlow = () => {
-    const cards = document.querySelectorAll('.course-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // Динамически меняем положение градиента в псевдоэлементе через переменные
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-            
-            // Если нужно более точное управление через JS (альтернатива CSS ::before):
-            const glow = card.querySelector('.course-card::before');
-            // В данном случае мы используем CSS-эффект, но здесь можно добавить Tilt.js логику
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
-    });
-};
+    };
 
-initCardsGlow();
-const initReviewsSlider = () => {
-    new Swiper('.reviews__slider', {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        breakpoints: {
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 2 }
-        },
-        autoplay: { delay: 5000 }
-    });
-};
+    // --- 4. TYPEWRITER EFFECT ---
+    const initTypewriter = () => {
+        if (document.getElementById('typewriter')) {
+            new TypeIt("#typewriter", {
+                speed: 50,
+                loop: true,
+                waitUntilVisible: true
+            })
+            .type("git clone <?= $domainSlug ?>.fit", {delay: 1000})
+            .break().type("> Loading AI-modules...")
+            .pause(1000).delete().type("Готовы изменить свою жизнь?")
+            .go();
+        }
+    };
 
-initReviewsSlider();
-// Инициализация капчи
-let captchaAnswer;
-const generateCaptcha = () => {
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    captchaAnswer = num1 + num2;
-    document.getElementById('captcha-label').innerText = `Решите пример: ${num1} + ${num2} =`;
-};
+    // --- 5. CONTACT FORM & CAPTCHA ---
+    let captchaAnswer;
+    const generateCaptcha = () => {
+        const label = document.getElementById('captcha-label');
+        if (!label) return;
+        const n1 = Math.floor(Math.random() * 10);
+        const n2 = Math.floor(Math.random() * 10);
+        captchaAnswer = n1 + n2;
+        label.innerText = `Подтвердите: ${n1} + ${n2} =`;
+    };
 
-// Валидация телефона (только цифры)
-const phoneInput = document.getElementById('phone');
-phoneInput?.addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-});
+    const contactForm = document.getElementById('ajax-form');
+    contactForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const ans = parseInt(document.getElementById('captcha-input').value);
+        const msg = document.getElementById('form-message');
 
-// AJAX отправка
-const contactForm = document.getElementById('ajax-form');
-const formMessage = document.getElementById('form-message');
+        if (ans !== captchaAnswer) {
+            msg.innerText = "Неверная капча!";
+            msg.className = "form__message error";
+            return;
+        }
 
-contactForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const userInput = parseInt(document.getElementById('captcha-input').value);
+        const btn = contactForm.querySelector('button');
+        btn.disabled = true;
+        btn.innerText = "Отправка...";
 
-    if (userInput !== captchaAnswer) {
-        formMessage.innerText = "Ошибка капчи. Попробуйте снова.";
-        formMessage.className = "form__message error";
-        generateCaptcha();
-        return;
-    }
-
-    // Имитация AJAX
-    const submitBtn = contactForm.querySelector('button');
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Отправка...";
-
-    try {
-        // Здесь был бы ваш fetch('/send.php', { method: 'POST', body: new FormData(contactForm) });
-        await new Promise(resolve => setTimeout(resolve, 1500)); // Имитация задержки сети
+        await new Promise(r => setTimeout(r, 1500));
         
-        formMessage.innerText = "Успешно! Мы свяжемся с вами в ближайшее время.";
-        formMessage.className = "form__message success";
+        msg.innerText = "Заявка принята! Мы скоро свяжемся с вами.";
+        msg.className = "form__message success";
         contactForm.reset();
+        btn.disabled = false;
+        btn.innerText = "Запросить доступ";
         generateCaptcha();
-    } catch (err) {
-        formMessage.innerText = "Произошла ошибка. Попробуйте позже.";
-        formMessage.className = "form__message error";
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Запросить доступ";
-    }
-});
+    });
 
-generateCaptcha();
+    // --- 6. SWIPER REVIEWS ---
+    const initSwiper = () => {
+        if (document.querySelector('.swiper')) {
+            new Swiper('.swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                autoplay: { delay: 4000 },
+                breakpoints: { 768: { slidesPerView: 2 } }
+            });
+        }
+    };
+
+    // Запуск всех систем
+    initHeroGrid();
+    initTypewriter();
+    initSwiper();
+    generateCaptcha();
+});

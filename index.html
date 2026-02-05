@@ -244,19 +244,55 @@
         </div>
 
         <div class="reviews__slider swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide review-card">
-                    <div class="review-card__header">
-                        <img src="img/placeholder.png" alt="Avatar" class="review-card__img">
-                        <div>
-                            <h4 class="review-card__name">Marc Durand</h4>
-                            <p class="review-card__pos">Frontend Developer, Paris</p>
-                        </div>
-                    </div>
-                    <p class="review-card__text">"Это платформа года. Благодаря AI-инструментам я смог освоить React за
-                        2 месяца и найти работу во Франции."</p>
-                </div>
+<div class="swiper-wrapper">
+    <div class="swiper-slide review-card">
+        <div class="review-card__header">
+            <img src="img/placeholder.png" alt="Marc Durand" class="review-card__img">
+            <div>
+                <h4 class="review-card__name">Marc Durand</h4>
+                <p class="review-card__pos">Frontend Developer, Paris</p>
             </div>
+        </div>
+        <p class="review-card__text">"Это платформа года. Благодаря AI-инструментам я смог освоить React за 2 месяца и
+            найти работу во Франции. Методологии действительно работают."</p>
+    </div>
+
+    <div class="swiper-slide review-card">
+        <div class="review-card__header">
+            <img src="img/placeholder.png" alt="Sophie Martin" class="review-card__img">
+            <div>
+                <h4 class="review-card__name">Sophie Martin</h4>
+                <p class="review-card__pos">UI/UX Designer, Lyon</p>
+            </div>
+        </div>
+        <p class="review-card__text">"Переосмыслила свой подход к дизайну. Пошаговый путь, понятный каждому, позволил
+            мне внедрить нейросети в мой рабочий процесс за считанные недели."</p>
+    </div>
+
+    <div class="swiper-slide review-card">
+        <div class="review-card__header">
+            <img src="img/placeholder.png" alt="Lucas Bernard" class="review-card__img">
+            <div>
+                <h4 class="review-card__name">Lucas Bernard</h4>
+                <p class="review-card__pos">Backend Engineer, Nice</p>
+            </div>
+        </div>
+        <p class="review-card__text">"Экспертная поддержка на всех этапах обучения. Я пришел без опыта, но передовая
+            цифровая инфраструктура школы помогла мне быстро войти в ритм IT-индустрии."</p>
+    </div>
+
+    <div class="swiper-slide review-card">
+        <div class="review-card__header">
+            <img src="img/placeholder.png" alt="Amélie Petit" class="review-card__img">
+            <div>
+                <h4 class="review-card__name">Amélie Petit</h4>
+                <p class="review-card__pos">Data Analyst, Bordeaux</p>
+            </div>
+        </div>
+        <p class="review-card__text">"Технологии нового поколения — это не просто слова. Реальные проекты и практика
+            помогли мне получить предложение от международной компании."</p>
+    </div>
+</div>
             <div class="swiper-pagination"></div>
         </div>
     </div>
@@ -328,14 +364,6 @@
 
 
 
-
-
-
-
-
-
-
-
     </main>
 
     <footer class="footer">
@@ -391,9 +419,22 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <div id="cookie-popup" class="cookie-popup">
+        <div class="cookie-popup__content">
+            <div class="cookie-popup__icon"><i class="fa-solid fa-cookie-bite"></i></div>
+            <div class="cookie-popup__text">
+                Этот сайт использует cookies для улучшения работы. Подробнее — в нашей <a href="./cookies.php">Cookie
+                    политике</a>.
+            </div>
+            <button id="cookie-accept" class="btn btn--small btn--primary">Принять</button>
+        </div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+
 <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
-    <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script src="script.js"></script>
 </body>
 
 </html>

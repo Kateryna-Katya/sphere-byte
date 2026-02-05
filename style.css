@@ -734,6 +734,7 @@ a {
 }
 
 .swiper-pagination-bullet {
+ 
     background: var(--accent) !important;
 }
 
@@ -889,4 +890,130 @@ a {
     .contact__form-wrapper {
         padding: 30px;
     }
+}
+/* Cookie Popup */
+.cookie-popup {
+    position: fixed;
+    bottom: -100%;
+    left: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    z-index: 2000;
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    max-width: 500px;
+    margin-left: auto;
+}
+
+.cookie-popup--active {
+    transform: translateY(-40px);
+}
+
+.cookie-popup__content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cookie-popup__icon {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.cookie-popup__text {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+}
+
+.cookie-popup__text a {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+/* Mobile Menu Animation */
+.burger--active span {
+    background: transparent;
+}
+
+.burger--active::before {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burger--active::after {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Legal Pages Styles (Этап 5.2) */
+.pages {
+    padding: 150px 0 100px;
+    min-height: 80vh;
+}
+
+.pages h1 {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    color: var(--accent);
+}
+
+.pages h2 {
+    font-size: 1.6rem;
+    margin: 40px 0 20px;
+    color: var(--white);
+}
+
+.pages p {
+    margin-bottom: 20px;
+    color: var(--text-dim);
+}
+
+.pages ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.pages li {
+    list-style: disc;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+}
+/* Увеличиваем контейнер слайдера, чтобы освободить место снизу */
+.reviews__slider {
+    padding-bottom: 60px !important;
+    /* Место для точек пагинации */
+    position: relative;
+    overflow: hidden;
+    /* Чтобы слайды не вылезали за края при перелистывании */
+}
+
+/* Настройка самих точек пагинации */
+.swiper-pagination {
+    bottom: 10px !important;
+    /* Опускаем их к самому низу */
+}
+
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: var(--accent) !important;
+    opacity: 0.4;
+    transition: var(--transition);
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 25px;
+    /* Эффект растянутой активной точки */
+    border-radius: 5px;
+}
+
+/* Убедимся, что карточки отзывов имеют одинаковую высоту */
+.review-card {
+    height: auto;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
